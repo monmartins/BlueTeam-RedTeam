@@ -31,23 +31,6 @@ Scan UDP and TCP together, be verbose on a single host and include optional skip
     $ nmap -v -Pn -SU -ST -p U:53,111,137,T:2125,80,139,8080 <IP ADDRESS>
 ```
 
-## Nessus
-Basic Nessus scan: 
-```
-    $ nessus -q -x -T html <NESSUS SERVER IP ADDRESS> <NESSUS SERVER PORT 1241> <ADMIN ACCOUNT> <ADMIN PASSWORD> <FILE WITH TARGETS>,txt <RESULTS FILE NAME>.html 
-
-    $ nessus [-vnh] [-c .refile] [-VJ [-T <format>] 
-```
-Batch-mode scan:
-```
-    $ nessus -q [-pPS] <HOST> <PORT> <USER NAME> <PASSWORD> <targets-file> <result-file>
-```
-
-Report conversion: 
-
-```
-    $ nessus -i in. [nsrlnbe] -o out. [xmllnsrlnbelhtmlltxt]
-```
 
 ## Openvas
 
