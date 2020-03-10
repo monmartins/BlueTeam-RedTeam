@@ -37,12 +37,28 @@ Scan UDP and TCP together, be verbose on a single host and include optional skip
 Step 1: Install the server, client and plugin packages:
 
 ```
-    $ apt-get install openvas-server openvas-client openvas-plugins-base openvas-plugins-dfsg 
+    $ apt-get update -y && apt-get install  \
+    apt-transport-https \
+    ca-certificates \
+    curl \
+    gnupg-agent \
+    software-properties-common -y
+
+    $ add-apt-repository ppa:mrazavi/openvas
+
+    $ apt-get update -y && apt-get install libopenvas9-dev openvas9 sqlite3 -y
+
+    $ apt install texlive-latex-extra --no-install-recommends -y    
+
+    $ apt install texlive-fonts-recommended --no-install-recommends -y
+
 ```
 
 Step 2: Update the vulnerability database 
 ```
-    $ openvas-nvt-sync 
+    $ greenbone-nvt-sync
+    $ greenbone-scapdata-sync
+    $ greenbone-certdata-sync
 ```
 
 Step 3: Add a user to run the client: 
@@ -76,12 +92,54 @@ Step 11: Add one host, network per line:
 ```
 <IP ADDRESS OR RANGE> 
 ```
-Step 12: Run scan: 
+
+Step 12: Restart the OpenVAS scanner.
+```
+systemctl restart openvas-scanner
+```
+
+Step 13: Restart the OpenVAS manager.
+```
+systemctl restart openvas-manager
+```
+
+Step 14: Restart the Greenbone security assistant.
+
+```
+systemctl restart openvas-gsa
+```
+
+Step 15: Then enable restarted services on system boot.
+
+```
+systemctl enable openvas-scanner
+
+systemctl enable openvas-manager
+
+systemctl enable openvas-gsa
+```
+
+Step 16: Check OpenVAS processes
+```
+    $ openvasmd --rebuild --progress
+```
+
+Step 16: Run scan: 
 ```
     $ openvas-client -q 127.0.0.1 9390 sysadm nsrc+ws scanme.txt openvas-output-.html -T txt -V -x 
 ```
 
-Step 13: (Optional)run scan with HTML format: 
+Step 17: (Optional)run scan with HTML format: 
 ```
     $ openvas-client -q 127.0.0.1 9390 sysadm nsrc+ws scanme.txt openvas-output.txt -T html -V -x 
 ```
+
+
+Links:
+
+
+https://www.stationx.net/nmap-cheat-sheet/
+
+https://hackertarget.com/nmap-cheatsheet-a-quick-reference-guide/
+
+https://lzone.de/cheat-sheet/Security%20Auditing
