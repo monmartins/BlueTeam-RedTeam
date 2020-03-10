@@ -61,55 +61,29 @@ Step 2: Update the vulnerability database
     $ greenbone-certdata-sync
 ```
 
-Step 3: Add a user to run the client: 
+Step 2: Add your host to config file: 
 ```
-    $ openvas-adduser 
-```
-Step 4: Login: sysadm 
-
-Step 5: Authentication (pass/cert) [pass]: [HIT ENTER] 
-
-Step 6: Login password: <PASSWORD> You will then be asked to add "User rules".
-
-Step 7: Allow this user to scan authorized network by typing: 
-```
-accept <YOUR IP ADDRESS OR RANGE> 
-default deny 
+    $ echo 'ALLOW_HEADER_HOST=<ip or host>' >> /etc/default/openvas-gsa 
+    $ echo 'LISTEN_ADDRESS=0.0.0.0' >> /etc/default/openvas-gsa 
 ```
 
-Step 8: type ctrl-D to exit, and then accept. 
-
-Step 9: Start the server: 
-```
-    $ service openvas-server start 
-```
-Step 10: Set targets to scan: 
-Create a text file with a list of hosts/networks to scan. 
-```
-    $ vi scanme.txt 12 
-```
-Step 11: Add one host, network per line: 
-```
-<IP ADDRESS OR RANGE> 
-```
-
-Step 12: Restart the OpenVAS scanner.
+Step 3: Restart the OpenVAS scanner.
 ```
 systemctl restart openvas-scanner
 ```
 
-Step 13: Restart the OpenVAS manager.
+Step 4: Restart the OpenVAS manager.
 ```
 systemctl restart openvas-manager
 ```
 
-Step 14: Restart the Greenbone security assistant.
+Step 5: Restart the Greenbone security assistant.
 
 ```
 systemctl restart openvas-gsa
 ```
 
-Step 15: Then enable restarted services on system boot.
+Step 6: Then enable restarted services on system boot.
 
 ```
 systemctl enable openvas-scanner
@@ -119,20 +93,12 @@ systemctl enable openvas-manager
 systemctl enable openvas-gsa
 ```
 
-Step 16: Check OpenVAS processes
+Step 7: Check OpenVAS processes
 ```
     $ openvasmd --rebuild --progress
 ```
 
-Step 16: Run scan: 
-```
-    $ openvas-client -q 127.0.0.1 9390 sysadm nsrc+ws scanme.txt openvas-output-.html -T txt -V -x 
-```
 
-Step 17: (Optional)run scan with HTML format: 
-```
-    $ openvas-client -q 127.0.0.1 9390 sysadm nsrc+ws scanme.txt openvas-output.txt -T html -V -x 
-```
 
 
 Links:
