@@ -12,8 +12,6 @@ apt-get install nmap -y
 
 
 ```
-
-
 Not shown: 965 filtered ports, 26 closed ports
 PORT     STATE SERVICE  VERSION
 21/tcp   open  ftp      ProFTPD 1.3.3e
