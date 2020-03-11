@@ -109,3 +109,6 @@ https://www.stationx.net/nmap-cheat-sheet/
 https://hackertarget.com/nmap-cheatsheet-a-quick-reference-guide/
 
 https://lzone.de/cheat-sheet/Security%20Auditing
+
+https://medium.com/@infosecsanyam/nmap-cheat-sheet-nmap-scanning-types-scanning-commands-nse-scripts-868a7bd7f692
+https://blogs.sans.org/pen-testing/files/2013/10/NmapCheatSheetv1.1.pdf
